@@ -11,7 +11,7 @@ const Calculator = () => {
 
   /** TODO: what happens when I click a number? */
   const handleNumberClick = (value) => {
-    if(displayValue == 0) {
+    if(displayValue === 0) {
       setDisplayValue(value)
     } else {
       const newNumber = parseInt(`${displayValue}${value}`)
@@ -23,14 +23,14 @@ const Calculator = () => {
   /** TODO: what happens when I click an operation? */
   const handleOperationClick = (operation) => {
 
-    if(operation === 'clear') {
+    if(operation === 'C') {
       setLastOperand(0)
       setDisplayValue(0)
       setLastOperation(null)
 
     } else if(operation === '=') {
         calculate(lastOperation)
-    } else if(lastOperand != 0) {
+    } else if(lastOperand !== 0) {
         calculate(operation)
     } else {
       setLastOperation(operation)
@@ -68,28 +68,28 @@ const Calculator = () => {
   };
 
   return (
-    <div>
+    <div className="container">
       <Screen value={displayValue} />
-      <div style={{ display: "flex" }}>
-        <div>
-          <Number value={0} onClick={handleNumberClick} />
-          <Number value={1} onClick={handleNumberClick} />
-          <Number value={2} onClick={handleNumberClick} />
-          <Number value={3} onClick={handleNumberClick} />
-          <Number value={4} onClick={handleNumberClick} />
-          <Number value={5} onClick={handleNumberClick} />
-          <Number value={6} onClick={handleNumberClick} />
+      <div className="inner">
+        <div className="inner-section">
           <Number value={7} onClick={handleNumberClick} />
           <Number value={8} onClick={handleNumberClick} />
           <Number value={9} onClick={handleNumberClick} />
+          <Number value={4} onClick={handleNumberClick} />
+          <Number value={5} onClick={handleNumberClick} />
+          <Number value={6} onClick={handleNumberClick} />
+          <Number value={1} onClick={handleNumberClick} />
+          <Number value={2} onClick={handleNumberClick} />
+          <Number value={3} onClick={handleNumberClick} />
+          <Number value={0} onClick={handleNumberClick} />
         </div>
-        <div style={{ paddingLeft: 10 }}>
+        <div className="inner-section">
           <Operation value="+" onClick={handleOperationClick} />
           <Operation value="/" onClick={handleOperationClick} />
           <Operation value="x" onClick={handleOperationClick} />
           <Operation value="-" onClick={handleOperationClick} />
           <Operation value="=" onClick={handleOperationClick} />
-          <Operation value="clear" onClick={handleOperationClick} />
+          <Operation value="C" onClick={handleOperationClick} />
         </div>
       </div>
     </div>

@@ -6,11 +6,7 @@ const Operation = ({ value, onClick }) => {
 
   return (
     <div
-      style={{
-        padding: 10,
-        border: "1px solid black",
-        width: 60,
-      }}
+      className="operation"
       onClick={handleClick}
     >
       {value}

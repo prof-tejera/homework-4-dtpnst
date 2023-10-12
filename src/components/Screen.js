@@ -1,6 +1,7 @@
 const Screen = ({ value }) => {
   return (
     <div
+      className="screen"
       style={{
         border: "1px solid black",
         width: 300,
