@@ -1,19 +1,75 @@
+import { useState } from "react";
 import Number from "./Number";
 import Operation from "./Operation";
 import Screen from "./Screen";
 
 const Calculator = () => {
   /** TODO: Here is where you are going to keep track of calculator state */
+  const [displayValue, setDisplayValue] = useState(0);
+  const [lastOperand, setLastOperand] = useState(0);
+  const [lastOperation, setLastOperation] = useState(null);
 
   /** TODO: what happens when I click a number? */
-  const handleNumberClick = () => {};
+  const handleNumberClick = (value) => {
+    if(displayValue == 0) {
+      setDisplayValue(value)
+    } else {
+      const newNumber = parseInt(`${displayValue}${value}`)
+      setDisplayValue(newNumber)
+    }
+    
+  };
 
   /** TODO: what happens when I click an operation? */
-  const handleOperationClick = () => {};
+  const handleOperationClick = (operation) => {
+
+    if(operation === 'clear') {
+      setLastOperand(0)
+      setDisplayValue(0)
+      setLastOperation(null)
+
+    } else if(operation === '=') {
+        calculate(lastOperation)
+    } else if(lastOperand != 0) {
+        calculate(operation)
+    } else {
+      setLastOperation(operation)
+      setLastOperand(displayValue)
+      setDisplayValue(0)
+    }
+
+  };
+
+  const calculate = (operation) => {
+      switch (operation) {
+        case '+':
+          setDisplayValue(lastOperand + displayValue)
+          setLastOperand(0)
+          break;
+        case '/':
+          setDisplayValue(lastOperand / displayValue)
+          setLastOperand(0)
+          break;
+        case 'x':
+          setDisplayValue(lastOperand * displayValue)
+          setLastOperand(0)
+          break;
+        case '-':
+          setDisplayValue(lastOperand - displayValue)
+          setLastOperand(0)
+          break;
+        default:
+          break;
+      }
+
+   
+    
+
+  };
 
   return (
     <div>
-      <Screen value="123" />
+      <Screen value={displayValue} />
       <div style={{ display: "flex" }}>
         <div>
           <Number value={0} onClick={handleNumberClick} />
